@@ -1,0 +1,29 @@
+# Training configuration (placeholder — extend when implementing trainers)
+
+paths:
+  datasets_dir: ../datasets
+  processed_dir: ../datasets/processed
+  model_output_dir: ../models
+
+sentiment:
+  train_file: processed/sentiment/train.jsonl
+  val_file: processed/sentiment/val.jsonl
+  test_file: processed/sentiment/test.jsonl
+  output_dir: sentiment
+  # model_name: distilbert-base-uncased
+  # epochs: 3
+  # batch_size: 16
+  # learning_rate: 2.0e-5
+
+absa:
+  train_file: processed/absa/train.jsonl
+  val_file: processed/absa/val.jsonl
+  test_file: processed/absa/test.jsonl
+  output_dir: absa
+
+recommender:
+  ratings_file: processed/recommender/ratings.csv
+  output_dir: recommender
+
+evaluation:
+  metrics_dir: ../datasets/processed/eval

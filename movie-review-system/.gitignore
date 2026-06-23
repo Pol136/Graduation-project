@@ -1,0 +1,113 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Environment
+.env
+.env.local
+*.env
+!.env.example
+
+# Node
+node_modules/
+dist/
+*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ─── Datasets (training data — never commit) ───────────────────────────────
+# Directory contents are ignored; .gitkeep and README.md files are tracked.
+
+datasets/raw/**
+!datasets/raw/
+!datasets/raw/.gitkeep
+!datasets/raw/**/
+!datasets/raw/**/.gitkeep
+!datasets/raw/**/README.md
+
+datasets/processed/**
+!datasets/processed/
+!datasets/processed/.gitkeep
+!datasets/processed/**/
+!datasets/processed/**/.gitkeep
+!datasets/processed/**/README.md
+
+datasets/external/**
+!datasets/external/
+!datasets/external/.gitkeep
+!datasets/external/**/
+!datasets/external/**/.gitkeep
+!datasets/external/**/README.md
+
+datasets/notebooks/**
+!datasets/notebooks/
+!datasets/notebooks/.gitkeep
+!datasets/notebooks/**/
+!datasets/notebooks/**/.gitkeep
+!datasets/notebooks/**/*.md
+
+# Safety net: common data formats anywhere under datasets/
+datasets/**/*.csv
+datasets/**/*.tsv
+datasets/**/*.jsonl
+datasets/**/*.parquet
+datasets/**/*.feather
+datasets/**/*.pkl
+datasets/**/*.pickle
+datasets/**/*.npy
+datasets/**/*.npz
+datasets/**/*.h5
+datasets/**/*.hdf5
+datasets/**/*.zip
+datasets/**/*.tar
+datasets/**/*.tar.gz
+datasets/**/*.gz
+datasets/**/*.bz2
+datasets/**/*.7z
+datasets/**/*.bin
+datasets/**/*.safetensors
+datasets/**/*.onnx
+datasets/**/*.pt
+datasets/**/*.pth
+
+# Jupyter outputs
+.ipynb_checkpoints/
+datasets/notebooks/.ipynb_checkpoints/
+
+# ─── ML inference artifacts (ml_service only) ──────────────────────────────
+ml_service/models/**
+!ml_service/models/
+!ml_service/models/.gitkeep
+!ml_service/models/README.md
+!ml_service/models/manifest.json.example
+
+# Logs & temp
+*.log
+tmp/
+temp/
+
+# Docker
+.docker/

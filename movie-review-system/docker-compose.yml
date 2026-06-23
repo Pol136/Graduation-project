@@ -1,0 +1,71 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: mrs-postgres
+    environment:
+      POSTGRES_DB: movie_review_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d movie_review_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: mrs-backend
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/movie_review_db
+      ML_SERVICE_URL: http://ml_service:8001
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ml_service:
+        condition: service_started
+    volumes:
+      - ./backend/app:/app/app:ro
+
+  ml_service:
+    build:
+      context: ./ml_service
+      dockerfile: Dockerfile
+    container_name: mrs-ml-service
+    ports:
+      - "${ML_SERVICE_PORT:-8001}:8001"
+    environment:
+      MODEL_DIR: /app/models
+      DATASETS_DIR: /datasets
+      PROCESSED_DATA_DIR: /datasets/processed
+    volumes:
+      - ./ml_service/app:/app/app:ro
+      - ./ml_service/training:/app/training:ro
+      - ./ml_service/models:/app/models
+      - ./datasets:/datasets
+    # Service starts only when trained artifacts exist under ml_service/models/
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: mrs-frontend
+    ports:
+      - "${FRONTEND_PORT:-5173}:5173"
+    environment:
+      VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8000}
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

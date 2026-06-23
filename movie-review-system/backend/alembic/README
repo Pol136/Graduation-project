@@ -1,0 +1,6 @@
+Generic single-database configuration for Alembic migrations.
+
+Initialize with:
+  cd backend && alembic init alembic  # if not yet configured
+
+Migrations will be added when ORM models are implemented.

@@ -1,0 +1,15 @@
+{
+  "version": "1",
+  "sentiment": {
+    "path": "sentiment",
+    "format": "transformers"
+  },
+  "absa": {
+    "path": "absa",
+    "format": "transformers"
+  },
+  "recommender": {
+    "path": "recommender",
+    "format": "sklearn"
+  }
+}
