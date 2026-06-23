@@ -19,25 +19,14 @@
 ## Технологический стек
 
 **Backend:** Python, FastAPI, SQLAlchemy, Alembic, JWT
+
 **Frontend:** React, TypeScript, Vite
+
 **Database:** PostgreSQL, JSONB
+
 **ML/NLP:** Hugging Face Transformers, RuBERT-tiny sentiment, mDeBERTa zero-shot
+
 **DevOps:** Docker, Docker Compose
-
-## Архитектура
-
-Проект состоит из четырёх основных компонентов:
-
-```text
-Frontend → Backend → PostgreSQL
-              ↓
-          ML-сервис
-```
-
-* **Frontend** отвечает за пользовательский интерфейс.
-* **Backend** реализует бизнес-логику, API, авторизацию и рекомендации.
-* **ML-сервис** выполняет анализ отзывов.
-* **PostgreSQL** хранит пользователей, фильмы, отзывы, результаты анализа и рекомендации.
 
 ## Как работает анализ отзыва
 
